@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
-<body style="width:48mm;text-align:center;font-size:9pt;">
+<head>
+<meta charset="utf-8">
+<title>Label Print</title>
+<style>
+  body { width: 48mm; text-align: center; font-size: 9pt; margin: 0; }
+</style>
+</head>
+<body>
   <img id="qr" width="100" height="100"><br>
   <b id="name"></b><br>
   <span id="price"></span>
@@ -12,11 +19,11 @@
     document.getElementById("qr").src = qr;
     document.getElementById("name").innerText = name;
     document.getElementById("price").innerText = "₹" + price;
-    // Auto-print through RawBT
-    setTimeout(() => {
+    // Wait for QR to load, then trigger RawBT
+    document.getElementById("qr").onload = () => {
       const html = document.body.outerHTML;
       window.location.href = "rawbt:" + encodeURIComponent(html);
-    }, 1500);
+    };
   </script>
 </body>
 </html>
