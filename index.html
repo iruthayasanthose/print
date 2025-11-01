@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body style="width:48mm;text-align:center;font-size:9pt;">
+  <img id="qr" width="100" height="100"><br>
+  <b id="name"></b><br>
+  <span id="price"></span>
+  <script>
+    const url = new URL(window.location.href);
+    const qr = decodeURIComponent(url.searchParams.get("qr"));
+    const name = decodeURIComponent(url.searchParams.get("name"));
+    const price = decodeURIComponent(url.searchParams.get("price"));
+    document.getElementById("qr").src = qr;
+    document.getElementById("name").innerText = name;
+    document.getElementById("price").innerText = "₹" + price;
+    // Auto-print through RawBT
+    setTimeout(() => {
+      const html = document.body.outerHTML;
+      window.location.href = "rawbt:" + encodeURIComponent(html);
+    }, 1500);
+  </script>
+</body>
+</html>
